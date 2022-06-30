@@ -1,0 +1,12 @@
+#characterCard {
+  margin: 0 auto;
+}
+  
+.characterTitle {
+  text-align: center;
+}
+
+.ant-descriptions-header {
+  text-align: center;
+  margin-top: 20px;
+}

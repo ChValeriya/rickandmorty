@@ -14,26 +14,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.card {
-  margin: 3px;
-}
-
-.characterCard {
-  margin: 0 auto;
-}
-
-.ant-descriptions-title, .ant-descriptions-item-label, .ant-descriptions-item-content {
-  text-align: center;
-  font-size: 20px;
-}
-
-.ant-descriptions-title {
-  margin-top: 20px;
-}
