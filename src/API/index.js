@@ -13,6 +13,13 @@ export default class DateService {
             .then(data => data)
     }
 
+    static getEpisodeById(id=1) {
+        return fetch (`${BASE_URL}episode/${id}`)
+            .then(res => res.json())
+            .then(data => data)
+    }
+
+
     static getEpisode() {
         return fetch (`${BASE_URL}episode`)
             .then(res => res.json())

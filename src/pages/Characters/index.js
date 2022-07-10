@@ -1,29 +1,32 @@
 import DateService from '../../API';
 import NavBar from "../../components/NavBar";
+import { getLastStrItem } from '../../utils';
 import "./styles.css";
 import { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
-import { Card, Pagination } from 'antd';
+import { Card } from 'antd';
 const { Meta } = Card;
 
 const Characters = () => {
+    const episodeId = useSelector((state) => state.menuItem);
     const [characters, setCharacters] = useState(null);
-    const [pages, setPages] = useState(1);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [episodes, setEpisodes] = useState([])
+    const [episodes, setEpisodes] = useState([]);
 
     useEffect(() => {
-        if (!characters || currentPage) {
-            DateService.getCharacters(currentPage)
-                .then(data => {
-                    setCharacters(data.results);
-                    setPages(data.info.pages)
-                })
+        DateService.getEpisodeById(episodeId)
+            .then(data => {
+                const ids = data.characters.map(item => getLastStrItem(item, '/'));
+                DateService.getCharacterById(ids)
+                    .then(res => setCharacters(res))
+        })
 
+        if(!episodes.length) {
             DateService.getEpisode()
-                .then(data => setEpisodes(data.results))
+                .then(res => setEpisodes(res.results))
         }
-    }, [currentPage]);
+
+    }, [episodeId]);
 
     const ourCharacters = characters && characters.map(item => 
         <div className="card" key={item.id}>
@@ -36,16 +39,11 @@ const Characters = () => {
         
     )
 
-    const onPageChange = (val) => {
-        setCurrentPage(val)
-    }
-
     return (
         <div className="charactersContainer">
             <NavBar items={episodes} />
             <div>
                 {characters ? <h1 className="cards">{ourCharacters}</h1> : <h1>Loading</h1>}
-                <Pagination className="pagination" defaultCurrent={currentPage} total={pages} onChange={onPageChange}  />
             </div>
         </div>
     )
