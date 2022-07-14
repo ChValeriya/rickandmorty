@@ -1,7 +1,7 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { chooseIncrement, chooseDecrement } from "../../redux/actions";
+import { chooseIncrement, chooseDecrement } from '../../redux/actions';
 
 export default function NotFound() {
   const counter = useSelector((state) => state.counter);
