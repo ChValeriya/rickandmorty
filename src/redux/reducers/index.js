@@ -1,4 +1,4 @@
-import { INCREMENT, DECREMENT, CHOOSE_MENU } from '../actions';
+import { INCREMENT, DECREMENT, CHOOSE_MENU, CHOOSE_FAVORITES } from '../actions';
 const initialState = {
   counter: 0,
   menuItem: 1,
@@ -12,6 +12,8 @@ function rootReducer(state = initialState, action) {
   case DECREMENT:
     return { counter: state.counter - 1 };
   case CHOOSE_MENU:
+    return {...state, menuItem: action.data};
+  case CHOOSE_FAVORITES:
     return {...state, menuItem: action.data};
   default:
     return state;
